@@ -15,12 +15,14 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
     chunkFilename: 'modules/[name].[chunkhash].js',
-    sourceMapFilename: '[file].map',
+    sourceMapFilename: '[file].map'
   },
   module: {
     loaders: [
       // react hot loader
       { test: /\.jsx?$/, loader: 'react-hot', include: path.join(__dirname, 'src') },
+      // stylesheet
+      {test: /\.css$/, loader: 'style-loader!css-loader'},
       // babel-loader
       {
         test: /\.jsx?$/,
