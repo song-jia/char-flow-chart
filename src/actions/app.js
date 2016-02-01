@@ -1,14 +1,32 @@
 import ActionTypes from './ActionTypes.js';
 
-export function toolButtonClick(id) {
+export function activateTool(tool) {
   return {
-    type: ActionTypes.TOOL_BUTTON_CLICK,
-    id: id
+    type: ActionTypes.ACTIVATE_TOOL,
+    tool: tool
   };
 }
 
-export function drawLine() {
+export function startUsingTool(x, y) {
   return {
-    type: ActionTypes.DRAW_LINE
+    type: ActionTypes.START_USING_TOOL,
+    x: x,
+    y: y
+  };
+}
+
+export function usingTool(x, y) {
+  return {
+    type: ActionTypes.USING_TOOL,
+    x: x,
+    y: y
+  };
+}
+
+export function finishUsingTool(x, y) {
+  return {
+    type: ActionTypes.FINISH_USING_TOOL,
+    x: x,
+    y: y
   };
 }

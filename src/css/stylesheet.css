@@ -1,6 +1,7 @@
 .tool-bar {
   background-color: #2d3e50;
   position: fixed;
+  z-index: 4;
 }
   .tool-bar .tool-button {
     background: none;
@@ -17,4 +18,14 @@
     }
   .tool-bar .tool-button-active {
     color: rgb(244, 245, 233);
+  }
+.sketchpad {
+  overflow: scroll;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  font-family: monospace;
+}
+  .sketchpad canvas {
+    display: block;
   }

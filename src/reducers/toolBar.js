@@ -6,8 +6,8 @@ const initialState = Map({
     // only one draw tool can be active in moment.
     activeDrawTool: '',
     drawTools: OrderedMap({
-      lineTool: Map({id:'lineTool', disabled: false, text: '直线'}),
-      textEditor: Map({id:'textEditor', disabled: false, text: '文字'}),
+      line: Map({id:'line', disabled: false, text: '直线'}),
+      text: Map({id:'text', disabled: false, text: '文字'}),
       eraser: Map({id:'eraser', disabled: false, text: '清除'})
     }),
     workspaceTools: OrderedMap({
@@ -22,8 +22,8 @@ export default function(state, action) {
     return initialState;
   }
   switch (action.type) {
-    case ActionTypes.TOOL_BUTTON_CLICK:
-      return state.updateIn(['buttons', 'activeDrawTool'], () => action.id);
+    case ActionTypes.ACTIVATE_TOOL:
+      return state.updateIn(['buttons', 'activeDrawTool'], () => action.tool);
     default:
       return state;
   }
