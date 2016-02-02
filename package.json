@@ -4,7 +4,7 @@
   "description": "tool of drawing char flow chart",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha --compilers js:babel-core/register --recursive",
+    "test": "mocha --compilers js:babel-core/register --recursive",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha --compilers js:babel-core/register --recursive",
     "start": "node react-hot-loader-server.js"
   },
