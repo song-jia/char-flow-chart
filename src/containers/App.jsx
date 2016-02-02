@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import * as Actions from '../actions/app';
 import {bindActionCreators} from 'redux';
 import ToolBar from '../components/ToolBar.jsx';
+// import Sketchpad from '../components/Sketchpad.jsx';
+import Sketchpad from '../components/SketchpadCanvas.jsx';
 
 class App extends Component {
 
@@ -10,7 +12,7 @@ class App extends Component {
     return (
       <div>
         <ToolBar {...this.props} />
-        char flow chart app
+        <Sketchpad {...this.props} />
       </div>
     );
   }
