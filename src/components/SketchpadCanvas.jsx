@@ -121,20 +121,34 @@ class Sketchpad extends Component {
     this.setState({
       mouseDown: true
     });
-    this.props.actions.startUsingTool(e.clientX, e.clientY);
+    let pos = this.getMousePosition(e);
+    this.props.actions.startUsingTool(pos.x, pos.y);
   }
 
   onMouseUp(e) {
     this.setState({
       mouseDown: false
     });
-    this.props.actions.finishUsingTool(e.clientX, e.clientY);
+    let pos = this.getMousePosition(e);
+    this.props.actions.finishUsingTool(pos.x, pos.y);
   }
 
   onMouseMove(e) {
     if (this.state.mouseDown) {
-      this.props.actions.usingTool(e.clientX, e.clientY);
+      let pos = this.getMousePosition(e);
+      this.props.actions.usingTool(pos.x, pos.y);
     }
+  }
+
+  // calculate mouse position on canvas.
+  // parameter: mouse event object
+  getMousePosition(e) {
+    let canvas = this.refs.drawArea;
+    let rect = canvas.getBoundingClientRect();
+    return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+    };
   }
 }
 

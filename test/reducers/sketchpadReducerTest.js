@@ -126,7 +126,43 @@ describe('sketchpad reducer', () => {
         expect(nextStateObj.units).to.deep.equals(expectedUnits);
         expect(nextStateObj.drawingUnits).to.be.empty;
       });
-      it ('should display cross (+) when two lines are crossed.');
+      it ('should set the text of cross point to (+). ', () => {
+        let state = Object.assign({}, initialState);
+        state.tool = 'line';
+        state.drawingUnits = [
+          {x: 91, y: 105, col: 10, row: 8, text: '|'},
+          {x: 91, y: 118, col: 10, row: 9, text: '|'},
+          {x: 91, y: 131, col: 10, row: 10, text: '|'}
+        ];
+        state.units = {
+          9: { // col 9
+            9: {x: 82, y: 118, col: 9, row: 9, text: '-'} // row 9
+          },
+          10: { // col 10
+            9: {x: 91, y: 118, col: 10, row: 9, text: '-'} // row 9
+          },
+          11: { // col 11
+            9: {x: 100, y: 118, col: 11, row: 9, text: '-'} // row 9
+          }
+        };
+        let nextState = sketchpadReducer(Immutable.fromJS(state), {type:'FINISH_USING_TOOL', x: 1, y: 1});
+        let nextStateObj = nextState.toJS();
+        let expectedUnits = {
+          9: { // col 9
+            9: {x: 82, y: 118, col: 9, row: 9, text: '-'} // row 9
+          },
+          10: { // col 10
+            8: {x: 91, y: 105, col: 10, row: 8, text: '|'}, // row 8
+            9: {x: 91, y: 118, col: 10, row: 9, text: '+'}, // row 9
+            10: {x: 91, y: 131, col: 10, row: 10, text: '|'} // row 10
+          },
+          11: { // col 11
+            9: {x: 100, y: 118, col: 11, row: 9, text: '-'} // row 9
+          }
+        };
+        expect(nextStateObj.units).to.deep.equals(expectedUnits);
+        expect(nextStateObj.drawingUnits).to.be.empty;
+      });
     });
   });
 });

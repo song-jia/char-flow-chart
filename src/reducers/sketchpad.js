@@ -114,6 +114,42 @@ function getUnitPosition(col, row, unitWidth, unitHeight, gridLine) {
   return {x: x, y: y};
 }
 
+// check if the unit that will be saved should be a cross point.
+function isCrossPoint(unit, units) {
+  if (isHorizontal(unit)) {
+    // unit besides on top or bottom is vertical line.
+    let topUnit = units.getIn([unit.col.toString(), (unit.row - 1).toString()]);
+    if (topUnit) {
+      topUnit = topUnit.toJS();
+    }
+    let bottomUnit = units.getIn([unit.col.toString(), (unit.row + 1).toString()]);
+    if (bottomUnit) {
+      bottomUnit = bottomUnit.toJS();
+    }
+    return isVertical(topUnit) || isVertical(bottomUnit);
+  }
+  if (isVertical(unit)) {
+    // unit besides on left or right is horizontal line.
+    let leftUnit = units.getIn([(unit.col - 1).toString(), unit.row.toString()]);
+    if (leftUnit) {
+      leftUnit = leftUnit.toJS();
+    }
+    let rightUnit = units.getIn([(unit.col + 1).toString(), unit.row.toString()]);
+    if (rightUnit) {
+      rightUnit = rightUnit.toJS();
+    }
+    return isHorizontal(leftUnit) || isHorizontal(rightUnit);
+  }
+}
+
+function isHorizontal(unit) {
+  return unit ? unit.text == '-' : false;
+}
+
+function isVertical(unit) {
+  return unit ? unit.text == '|' : false;
+}
+
 // get the unit mouse in.
 function mouseInUnit(state, x, y) {
   let gridLineSize = state.get('gridLineSize');
@@ -131,13 +167,18 @@ function recordStartPoint(state, action) {
 // save drawing units to cache
 function saveDrawingUnits (state, action) {
   let drawingUnits = state.get('drawingUnits').toJS();
-  let units = state.get('units').toJS();
+  let currentUnits = state.get('units');
+  let units = {};
   // convert drawingUnits: [unit, unit ...] to units {col: {row: unit, ...}, ...}
   for (let i = 0; i < drawingUnits.length; i++) {
     let drawingUnit = drawingUnits[i];
+    if (isCrossPoint(drawingUnit, currentUnits)) {
+      drawingUnit.text = '+';
+    }
     saveUnitToUnits(drawingUnit, units);
   }
-  return state.set('units', Immutable.fromJS(units)).set('drawingUnits', List());
+  // return state.set('units', Immutable.fromJS(units)).set('drawingUnits', List());
+  return state.mergeDeep({'units': units}).set('drawingUnits', List());
 }
 
 // save a unit to units cache.
