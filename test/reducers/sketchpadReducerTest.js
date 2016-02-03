@@ -139,7 +139,7 @@ describe('sketchpad reducer', () => {
             9: {x: 82, y: 118, col: 9, row: 9, text: '-'} // row 9
           },
           10: { // col 10
-            9: {x: 91, y: 118, col: 10, row: 9, text: '-'}, // row 9
+            9: {x: 91, y: 118, col: 10, row: 9, text: '-'} // row 9
           },
           11: { // col 11
             9: {x: 100, y: 118, col: 11, row: 9, text: '-'} // row 9

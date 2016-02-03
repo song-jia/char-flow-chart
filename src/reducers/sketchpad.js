@@ -118,11 +118,27 @@ function getUnitPosition(col, row, unitWidth, unitHeight, gridLine) {
 function isCrossPoint(unit, units) {
   if (isHorizontal(unit)) {
     // unit besides on top or bottom is vertical line.
-    return isVertical(units.getIn([unit.col, unit.row - 1])) || isVertical(units.getIn([unit.col, unit.row + 1]));
+    let topUnit = units.getIn([unit.col.toString(), (unit.row - 1).toString()]);
+    if (topUnit) {
+      topUnit = topUnit.toJS();
+    }
+    let bottomUnit = units.getIn([unit.col.toString(), (unit.row + 1).toString()]);
+    if (bottomUnit) {
+      bottomUnit = bottomUnit.toJS();
+    }
+    return isVertical(topUnit) || isVertical(bottomUnit);
   }
   if (isVertical(unit)) {
     // unit besides on left or right is horizontal line.
-    return isHorizontal(units.getIn([unit.col - 1, unit.row])) || isHorizontal(units.getIn([unit.col + 1, unit.row]));
+    let leftUnit = units.getIn([(unit.col - 1).toString(), unit.row.toString()]);
+    if (leftUnit) {
+      leftUnit = leftUnit.toJS();
+    }
+    let rightUnit = units.getIn([(unit.col + 1).toString(), unit.row.toString()]);
+    if (rightUnit) {
+      rightUnit = rightUnit.toJS();
+    }
+    return isHorizontal(leftUnit) || isHorizontal(rightUnit);
   }
 }
 
