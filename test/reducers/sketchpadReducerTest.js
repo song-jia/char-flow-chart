@@ -88,6 +88,29 @@ describe('sketchpad reducer', () => {
         });
       });
     });
+    context('when the tool is rectangle.', () => {
+      let state = Object.assign({}, initialState);
+      state.tool = 'rect';
+      state.startPoint = {col: 9, row: 9}; // x: 86 y: 124
+      context('when current point is not same as start point', () => {
+        it ('should draw a rectangle.', () => {
+          let nextStateIm = sketchpadReducer(Immutable.fromJS(state), {type: 'USING_TOOL', x: 105, y: 148});
+          let nextState = nextStateIm.toJS();
+          let expectedState = Object.assign({}, state);
+          expectedState.drawingUnits = [
+            {x: 82, y: 118, col: 9, row: 9, text: '+'},
+            {x: 82, y: 144, col: 9, row: 11, text: '+'},
+            {x: 91, y: 118, col: 10, row: 9, text: '-'},
+            {x: 91, y: 144, col: 10, row: 11, text: '-'},
+            {x: 100, y: 118, col: 11, row: 9, text: '+'},
+            {x: 100, y: 144, col: 11, row: 11, text: '+'},
+            {x: 82, y: 131, col: 9, row: 10, text: '|'},
+            {x: 100, y: 131, col: 11, row: 10, text: '|'}
+          ];
+          expect(nextState).to.deep.equal(expectedState);
+        });
+      });
+    });
     context('when no tool selected.', () => {
       it('should return initial state', () => {
         let state = Immutable.fromJS(initialState);
@@ -97,7 +120,7 @@ describe('sketchpad reducer', () => {
     });
   });
   describe('receive action FINISH_USING_TOOL.', () => {
-    context('when tool is line.', () => {
+    context('when tool is line or rect.', () => {
       it ('should save the line in drawing cache.', () => {
         let state = Object.assign({}, initialState);
         state.tool = 'line';

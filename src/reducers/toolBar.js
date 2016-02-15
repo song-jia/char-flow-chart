@@ -7,6 +7,7 @@ const initialState = Map({
     activeDrawTool: '',
     drawTools: OrderedMap({
       line: Map({id:'line', disabled: false, text: '直线'}),
+      rect: Map({id: 'rect', disabled: false, text: '方框'}),
       text: Map({id:'text', disabled: false, text: '文字'}),
       eraser: Map({id:'eraser', disabled: false, text: '清除'})
     }),

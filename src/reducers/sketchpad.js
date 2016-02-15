@@ -41,6 +41,38 @@ function drawLine(state, action) {
   return state.set('drawingUnits', Immutable.fromJS(drawingUnits));
 }
 
+function drawRect(state, action) {
+  let currentUnit = mouseInUnit(state, action.x, action.y);
+  let startUnit = state.get('startPoint').toJS();
+  let drawingUnits = [];
+  // top line & bottom line
+  for (let col = startUnit.col; col <= currentUnit.col; col++) {
+    let text = '-';
+    if (col === startUnit.col || col === currentUnit.col) {
+      text = '+';
+    }
+    drawingUnits.push(drawUnit(col, startUnit.row, text, state.get('unitWidth'), state.get('unitHeight'), state.get('gridLineSize')));
+    drawingUnits.push(drawUnit(col, currentUnit.row, text, state.get('unitWidth'), state.get('unitHeight'), state.get('gridLineSize')));
+  }
+  // left line & right line
+  for (let row = startUnit.row + 1; row <= currentUnit.row - 1; row++) {
+    drawingUnits.push(drawUnit(startUnit.col, row, '|', state.get('unitWidth'), state.get('unitHeight'), state.get('gridLineSize')));
+    drawingUnits.push(drawUnit(currentUnit.col, row, '|', state.get('unitWidth'), state.get('unitHeight'), state.get('gridLineSize')));
+  }
+  return state.set('drawingUnits', Immutable.fromJS(drawingUnits));
+}
+
+function drawUnit(col, row, text, unitWidth, unitHeight, border) {
+  let unitPos = getUnitPosition(col, row, unitWidth, unitHeight, border);
+  return {
+    x: unitPos.x,
+    y: unitPos.y,
+    col: col,
+    row: row,
+    text: text
+  };
+}
+
 // draw a vertical line from unit (col, row1) to unit (col, row2), return units of line
 function drawVerticalLine(row1, row2, col, state) {
   let units = [];
@@ -60,7 +92,7 @@ function drawVerticalLine(row1, row2, col, state) {
 }
 
 function finishUsingTool(state, action) {
-  if (state.get('tool') === 'line') {
+  if (state.get('tool') === 'line' || state.get('tool') === 'rect') {
     return saveDrawingUnits(state, action);
   }
   return state;
@@ -195,6 +227,9 @@ function saveUnitToUnits(unit, units) {
 function usingTool(state, action) {
   if (state.get('tool') === 'line') {
     return drawLine(state, action);
+  }
+  if (state.get('tool') === 'rect') {
+    return drawRect(state, action);
   }
   return state;
 }

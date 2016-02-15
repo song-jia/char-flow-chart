@@ -9,7 +9,8 @@ describe('toolBar reducer', () => {
       'drawTools': {
         'eraser': {'disabled': false, 'id': 'eraser', 'text': '清除'},
         'line': {'disabled': false, 'id': 'line', 'text': '直线'},
-        'text': {'disabled': false, 'id': 'text', 'text': '文字'}
+        'text': {'disabled': false, 'id': 'text', 'text': '文字'},
+        'rect': {'disabled': false, 'id': 'rect', 'text': '方框'}
       },
       'workspaceTools': {
         'drop': {'disabled': false, 'id': 'drop', 'text': '清空'},
