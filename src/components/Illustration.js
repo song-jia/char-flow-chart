@@ -4,11 +4,11 @@ import Sketchpad from "./Sketchpad";
 
 class Illustration extends React.Component {
   render() {
-    let elements = [];
+    let glyphs = [];
     return (
       <div>
         <h1>Illustration</h1>
-        <Sketchpad width={400} height={300} elements={elements} />
+        <Sketchpad width={400} height={300} glyphs={glyphs} />
       </div>
     );
   }
