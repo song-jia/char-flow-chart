@@ -1,11 +1,12 @@
 // @flow
 import React, { Component, PureComponent } from "react";
 import * as painter from "../painter";
+import type { Item } from "../models/types";
 
 type Props = {
   width: number,
   height: number,
-  glyphs: Array<mixed>
+  items: Array<Item>
 };
 
 class Sketchpad extends PureComponent {
@@ -19,11 +20,7 @@ class Sketchpad extends PureComponent {
   componentDidMount() {
     let ctx: CanvasRenderingContext2D = this.canvas.getContext("2d");
     ctx.font = "15px Source Code Pro";
-    const items = [];
-    painter.draw(ctx, items);
-    // Cross.draw(ctx, position(30, 20));
-    // Dash.draw(ctx, position(10, 20));
-    // TextBox.draw(ctx, position(10, 50), "text box");
+    painter.draw(ctx, this.props.items);
   }
 
   render() {

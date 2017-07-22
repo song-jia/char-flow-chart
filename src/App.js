@@ -1,11 +1,11 @@
 // @flow
 import React from "react";
-import Illustration from "./components/Illustration";
+import Sketchpad from "./containers/Sketchpad";
 
 const App = () => {
   return (
     <div>
-      <Illustration />
+      <Sketchpad />
     </div>
   );
 };
