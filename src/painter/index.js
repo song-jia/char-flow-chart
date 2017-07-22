@@ -1,8 +1,9 @@
 // @flow
-import toolFactory from "./tools";
+import * as tools from "./tools";
+import type { Item } from "../models/types";
 
-export const draw = (ctx: CanvasRenderingContext2D, items: ItemModel[]) => {
-  for (item of items) {
-    toolFactory.create(item.type).draw(ctx, items.attributes);
+export const draw = (ctx: CanvasRenderingContext2D, items: Item[]) => {
+  for (let item: Item of items) {
+    tools.create(item.type).draw(ctx, item.props);
   }
 };
