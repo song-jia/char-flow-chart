@@ -5,11 +5,13 @@ type State = {
   +items: Array<mixed>
 };
 
-type Action = {};
+type Action = {
+  type: string
+};
 
 const initState = {
-  width: 400,
-  height: 300,
+  width: 600,
+  height: 600,
   items: [
     {
       type: "textBox",
@@ -41,7 +43,13 @@ const initState = {
 };
 
 function canvas(state: State = initState, action: Action) {
-  return state;
+  switch (action.type) {
+    case "UPDATE_ITEMS":
+      // TODO: need implement update items into state.
+      break;
+    default:
+      return state;
+  }
 }
 
 export default canvas;

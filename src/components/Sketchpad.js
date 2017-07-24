@@ -1,12 +1,13 @@
 // @flow
-import React, { Component, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import * as painter from "../painter";
 import type { Item } from "../models/types";
 
 type Props = {
   width: number,
   height: number,
-  items: Array<Item>
+  items: Array<Item>,
+  addLine: Function
 };
 
 class Sketchpad extends PureComponent {
@@ -15,6 +16,7 @@ class Sketchpad extends PureComponent {
 
   constructor(props: Props) {
     super(props);
+    (this: any).addLineHandler = this.addLineHandler.bind(this);
   }
 
   componentDidMount() {
@@ -23,11 +25,11 @@ class Sketchpad extends PureComponent {
     painter.draw(ctx, this.props.items);
   }
 
+  addLineHandler() {
+    this.props.addLine({ x: 10, y: 50 }, { x: 100, y: 50 });
+  }
+
   render() {
-    const style = {
-      width: this.props.width + "px",
-      height: this.props.height + "px"
-    };
     return (
       <div id="canvas">
         <canvas
@@ -37,6 +39,8 @@ class Sketchpad extends PureComponent {
             this.canvas = canvas;
           }}
         />
+
+        <button onClick={this.addLineHandler}>new Line</button>
       </div>
     );
   }
