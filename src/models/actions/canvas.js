@@ -55,7 +55,7 @@ function createVerticalLineItems(
   let current = Math.min(start.y, end.y);
   let terminal = Math.max(start.y, end.y);
   while (current <= terminal) {
-    items.push(new PipeItem(new PixelPosition(start.x, current)));
+    items.push(new PipeItem(new GridPosition(start.x, current)));
     current++;
   }
   return items;

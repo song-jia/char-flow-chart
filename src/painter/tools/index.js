@@ -1,27 +1,28 @@
 // @flow
-import dash from "./dash";
-import cross from "./cross";
-import textBox from "./textBox";
-import type { Tool } from "./types";
+// import cross from "./cross";
+import Dash from "./Dash";
+import Pipe from "./Pipe";
+// import textBox from "./textBox";
 import type { ItemType } from "../../models/items/ItemType";
+import type { ITool } from "./ITool";
 
 const tools = {
-  cross,
-  dash,
-  textBox
+  dash: new Dash(),
+  pipe: new Pipe()
 };
-
 export default tools;
 
-export const create = (type: ItemType): Tool => {
+export function create(type: ItemType): ITool {
   switch (type) {
     case "dash":
-      return dash;
-    case "cross":
-      return cross;
-    case "textBox":
-      return textBox;
+      return tools.dash;
+    // case "cross":
+    //   return cross;
+    // case "textBox":
+    //   return textBox;
+    case "pipe":
+      return tools.pipe;
     default:
       throw new Error(`tool ${type} cannot be recognized.`);
   }
-};
+}

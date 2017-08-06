@@ -31,9 +31,7 @@ class Sketchpad extends PureComponent {
     painter.draw(this.ctx, this.props.items);
   }
 
-  addLineHandler() {
-    this.props.addLine(new PixelPosition(10, 50), new PixelPosition(100, 50));
-  }
+  addLineHandler() {}
 
   render() {
     return (
@@ -46,7 +44,24 @@ class Sketchpad extends PureComponent {
           }}
         />
 
-        <button onClick={this.addLineHandler}>new horizontal Line</button>
+        <button
+          onClick={() =>
+            this.props.addLine(
+              new PixelPosition(10, 50),
+              new PixelPosition(100, 50)
+            )}
+        >
+          new horizontal Line
+        </button>
+        <button
+          onClick={() =>
+            this.props.addLine(
+              new PixelPosition(150, 10),
+              new PixelPosition(150, 100)
+            )}
+        >
+          new vertical Line
+        </button>
       </div>
     );
   }
