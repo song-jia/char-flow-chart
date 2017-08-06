@@ -1,7 +1,7 @@
 // @flow
 import { combineReducers } from "redux";
-import canvas from "./canvas";
+import items from "./items";
 
 export default combineReducers({
-  canvas
+  items
 });
