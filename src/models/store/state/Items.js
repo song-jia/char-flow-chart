@@ -3,17 +3,8 @@ import Item from "../../items/Item";
 import GridPosition from "../../base/GridPosition";
 
 // immutable Items state
-export default class Items {
-  add(item: Item | Item[]): Items {
-    // TODO
-    return this;
-  }
+export type ItemsState = {
+  +[positionLiteral: string]: Item
+};
 
-  get(position: GridPosition): Item {
-    // TODO
-  }
-
-  getAll(): Item[] {
-    // TODO
-  }
-}
+export const initialState: ItemsState = {};
