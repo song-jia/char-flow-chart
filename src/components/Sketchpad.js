@@ -1,7 +1,6 @@
 // @flow
 import React, { PureComponent } from "react";
 import * as painter from "../painter";
-import Item from "../models/items/Item";
 import PixelPosition from "../models/base/position/PixelPosition";
 
 type Props = {

@@ -1,7 +1,6 @@
 // @flow
 import PixelPosition from "../base/position/PixelPosition";
 import GridPosition from "../base/position/GridPosition";
-import Grid from "../base/Grid";
 import Item from "../items/Item";
 import DashItem from "../items/DashItem";
 import PipeItem from "../items/PipeItem";

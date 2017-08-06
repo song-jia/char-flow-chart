@@ -1,6 +1,6 @@
 // @flow
 import Item from "./Item";
-import GridPosition from "../base/GridPosition";
+import GridPosition from "../base/position/GridPosition";
 
 const TYPE = "pipe";
 
