@@ -2,7 +2,8 @@
 import dash from "./dash";
 import cross from "./cross";
 import textBox from "./textBox";
-import type { Tool, ToolType } from "./types";
+import type { Tool } from "./types";
+import type { ItemType } from "../../models/items/ItemType";
 
 const tools = {
   cross,
@@ -12,7 +13,7 @@ const tools = {
 
 export default tools;
 
-export const create = (type: ToolType): Tool => {
+export const create = (type: ItemType): Tool => {
   switch (type) {
     case "dash":
       return dash;

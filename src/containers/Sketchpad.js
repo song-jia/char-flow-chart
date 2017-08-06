@@ -4,7 +4,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as canvasActions from "../models/actions/canvas";
 
-const mapStateToProps = state => state.canvas;
+// TODO: width and height need to be calculated base on window size.
+const mapStateToProps = state => ({
+  height: 600,
+  items: state.items,
+  width: 600
+});
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(canvasActions, dispatch);
