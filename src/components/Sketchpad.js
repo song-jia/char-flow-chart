@@ -51,7 +51,7 @@ class Sketchpad extends PureComponent {
               new PixelPosition(100, 50)
             )}
         >
-          new horizontal Line
+          horizontal Line
         </button>
         <button
           onClick={() =>
@@ -60,7 +60,23 @@ class Sketchpad extends PureComponent {
               new PixelPosition(150, 100)
             )}
         >
-          new vertical Line
+          vertical Line
+        </button>
+        <button
+          onClick={() => {
+            // horizontal line
+            this.props.addLine(
+              new PixelPosition(200, 50),
+              new PixelPosition(300, 50)
+            );
+            // vertical line
+            this.props.addLine(
+              new PixelPosition(250, 10),
+              new PixelPosition(250, 100)
+            );
+          }}
+        >
+          Cross Line
         </button>
       </div>
     );

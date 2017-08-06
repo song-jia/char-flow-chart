@@ -1,9 +1,6 @@
 // @flow
 import Item from "../../items/Item";
+import type { ItemsState } from "../../types";
 
 // immutable Items state
-export type ItemsState = {
-  +[positionLiteral: string]: Item
-};
-
 export const initialState: ItemsState = {};

@@ -4,10 +4,13 @@ import GridPosition from "../base/position/GridPosition";
 import Item from "../items/Item";
 import DashItem from "../items/DashItem";
 import PipeItem from "../items/PipeItem";
+import CrossItem from "../items/CrossItem";
+import type { State } from "../types";
 
 export function addLine(start: PixelPosition, end: PixelPosition) {
-  return (dispatch: Function) => {
+  return (dispatch: Function, getState: Function) => {
     let items = createLineItems(start.toGrid(), end.toGrid());
+    items = updateCross(items, getState());
     dispatch(updateItems(items));
   };
 }
@@ -66,4 +69,17 @@ function updateItems(items: Item[]) {
     type: "UPDATE_ITEMS",
     items
   };
+}
+
+function updateCross(items: Item[], state: State) {
+  return items.map((item: Item) => {
+    if (
+      state["items"].hasOwnProperty(item.position.literal()) &&
+      state["items"][item.position.literal()].type !== item.type
+    ) {
+      return new CrossItem(item.position);
+    } else {
+      return item;
+    }
+  });
 }

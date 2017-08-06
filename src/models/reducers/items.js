@@ -1,5 +1,5 @@
 // @flow
-import type { ItemsState } from "../store/state/Items";
+import type { ItemsState } from "../types";
 import { initialState } from "../store/state/Items";
 import Item from "../items/Item";
 
