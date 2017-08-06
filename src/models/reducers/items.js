@@ -1,5 +1,5 @@
 // @flow
-import GridPosition from "../base/GridPosition";
+import GridPosition from "../base/position/GridPosition";
 import type { ItemsState } from "../store/state/Items";
 import { initialState } from "../store/state/Items";
 import Item from "../items/Item";

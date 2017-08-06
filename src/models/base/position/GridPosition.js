@@ -1,4 +1,7 @@
 // @flow
+import PixelPosition from "./PixelPosition";
+import * as convertUtil from "./convertUtil";
+
 export default class GridPosition {
   x: number;
   y: number;
@@ -10,5 +13,9 @@ export default class GridPosition {
 
   literal(): string {
     return `${this.x},${this.y}`;
+  }
+
+  toPixel(): PixelPosition {
+    return convertUtil.gridToPixel(this);
   }
 }

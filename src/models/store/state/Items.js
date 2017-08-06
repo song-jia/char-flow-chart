@@ -1,6 +1,5 @@
 // @flow
 import Item from "../../items/Item";
-import GridPosition from "../../base/GridPosition";
 
 // immutable Items state
 export type ItemsState = {

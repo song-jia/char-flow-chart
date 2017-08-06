@@ -1,5 +1,5 @@
 // @flow
-import GridPosition from "../base/GridPosition";
+import GridPosition from "../base/position/GridPosition";
 import type { ItemType } from "./ItemType";
 
 export default class Item {

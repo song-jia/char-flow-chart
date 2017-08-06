@@ -1,6 +1,6 @@
 // @flow
-import PixelPosition from "../base/PixelPosition";
-import GridPosition from "../base/GridPosition";
+import PixelPosition from "../base/position/PixelPosition";
+import GridPosition from "../base/position/GridPosition";
 import Grid from "../base/Grid";
 import Item from "../items/Item";
 import DashItem from "../items/DashItem";
@@ -8,16 +8,9 @@ import PipeItem from "../items/PipeItem";
 
 export function addLine(start: PixelPosition, end: PixelPosition) {
   return (dispatch: Function) => {
-    let items = createLineItems(pixToGrid(start), pixToGrid(end));
+    let items = createLineItems(start.toGrid(), end.toGrid());
     dispatch(updateItems(items));
   };
-}
-
-function pixToGrid(pos: PixelPosition): GridPosition {
-  return new GridPosition(
-    Math.ceil(pos.x / Grid.width),
-    Math.ceil(pos.y / Grid.height)
-  );
 }
 
 function createLineItems(start: GridPosition, end: GridPosition): Item[] {
