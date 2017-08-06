@@ -5,10 +5,16 @@ import Item from "../items/Item";
 import DashItem from "../items/DashItem";
 import PipeItem from "../items/PipeItem";
 import CrossItem from "../items/CrossItem";
-import type { State } from "../types";
+import type {
+  State,
+  ActionUpdateItems,
+  Dispatch,
+  GetState,
+  ThunkAction
+} from "../types";
 
 export function addLine(start: PixelPosition, end: PixelPosition) {
-  return (dispatch: Function, getState: Function) => {
+  return (dispatch: Dispatch, getState: GetState) => {
     let items = createLineItems(start.toGrid(), end.toGrid());
     items = updateCross(items, getState());
     dispatch(updateItems(items));
@@ -64,7 +70,7 @@ function createVerticalLineItems(
   return items;
 }
 
-function updateItems(items: Item[]) {
+function updateItems(items: Item[]): ActionUpdateItems {
   return {
     type: "UPDATE_ITEMS",
     items

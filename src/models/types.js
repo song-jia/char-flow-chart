@@ -3,9 +3,9 @@
 import type Item from "./items/Item";
 
 // actions
-export type Action = ActionUpdateItems;
 export type ActionUpdateItems = { type: "UPDATE_ITEMS", items: Item[] };
-export type Dispatch = (action: Action | ThunkAction | PromiseAction) => any;
+export type Action = ActionUpdateItems;
+export type Dispatch = (action: Action | ThunkAction | PromiseAction) => void;
 export type GetState = () => State;
 export type PromiseAction = Promise<Action>;
 export type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
