@@ -1,11 +1,11 @@
 // @flow
 import Item from "./Item";
-import PixelPosition from "../base/PixelPosition";
+import GridPosition from "../base/GridPosition";
 
 const TYPE = "dash";
 
 export default class DashItem extends Item {
-  constructor(pos: PixelPosition) {
+  constructor(pos: GridPosition) {
     super(pos, TYPE);
   }
 }
