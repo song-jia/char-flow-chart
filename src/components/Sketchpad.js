@@ -22,7 +22,7 @@ class Sketchpad extends PureComponent {
 
   componentDidMount() {
     let ctx: CanvasRenderingContext2D = this.canvas.getContext("2d");
-    ctx.font = "15px Source Code Pro";
+    ctx.font = "14px Source Code Pro";
     this.ctx = ctx;
     painter.draw(ctx, this.props.items);
   }
@@ -78,6 +78,21 @@ class Sketchpad extends PureComponent {
         >
           Cross Line
         </button>
+        <div style={{ width: 300, height: 300, fontFamily: "Source Code Pro" }}>
+          <pre
+            style={{
+              fontFamily: "Source Code Pro",
+              fontSize: "14px",
+              lineHeight: "18px"
+            }}
+          >
+            +-----------+------------+<br />
+            |       Sketchpad        |<br />
+            +------------------------+<br />
+            |                        |<br />
+            +------------------------+<br />
+          </pre>
+        </div>
       </div>
     );
   }
