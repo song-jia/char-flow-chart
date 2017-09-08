@@ -1,27 +1,19 @@
 // @flow
-function objOff(obj): number[] {
-  let currleft: number = 0;
-  let currtop: number = 0;
-  if (obj.offsetParent) {
-    do {
-      currleft += obj.offsetLeft;
-      currtop += obj.offsetTop;
-    } while ((obj = obj.offsetParent));
-  } else {
-    currleft += obj.offsetLeft;
-    currtop += obj.offsetTop;
-  }
-  return [currleft, currtop];
-}
+// get font metrics of monospace fonts.
+type fontMetric = {
+  accent: number,
+  descent: number,
+  height: number,
+  width: number
+};
 
-// get font metrics [accent, height, descent]
-function getMetric(fontName: string, fontSize: number): number[] {
+export function getMetric(fontName: string, fontSize: number): fontMetric {
   let text = document.createElement("span");
   text.style.fontFamily = fontName;
   text.style.fontSize = fontSize + "px";
-  text.innerHTML = "ABCjgq|";
+  const testText = "ABCjgq|";
+  text.innerHTML = testText;
 
-  // if you will use some weird fonts, like handwriting or symbols, then you need to edit this test string for chars that will have most extreme accend/descend values
   let block = document.createElement("div");
   block.style.display = "inline-block";
   block.style.width = "1px";
@@ -43,20 +35,31 @@ function getMetric(fontName: string, fontSize: number): number[] {
   block.style.verticalAlign = "baseline";
   let bp = objOff(block);
   let tp = objOff(text);
-  let taccent: number = bp[1] - tp[1];
+  let accent: number = bp[1] - tp[1];
   block.style.verticalAlign = "bottom";
   bp = objOff(block);
   tp = objOff(text);
-  let theight: number = bp[1] - tp[1];
-  let tdescent: number = theight - taccent;
-
+  let height: number = bp[1] - tp[1];
+  let descent: number = height - accent;
+  let width: number = text.offsetWidth / testText.length;
   // now take it off :-)
   document.body && document.body.removeChild(div);
 
   // return text accent, descent and total height
-  return [taccent, theight, tdescent];
+  return { accent, height, descent, width };
 }
 
-export default {
-  getMetric
-};
+function objOff(obj): number[] {
+  let currleft: number = 0;
+  let currtop: number = 0;
+  if (obj.offsetParent) {
+    do {
+      currleft += obj.offsetLeft;
+      currtop += obj.offsetTop;
+    } while ((obj = obj.offsetParent));
+  } else {
+    currleft += obj.offsetLeft;
+    currtop += obj.offsetTop;
+  }
+  return [currleft, currtop];
+}
