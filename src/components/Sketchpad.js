@@ -23,7 +23,6 @@ class Sketchpad extends PureComponent {
   componentDidMount() {
     let ctx: CanvasRenderingContext2D = this.canvas.getContext("2d");
     ctx.font = "14px Source Code Pro";
-    // ctx.translate(0.5, 0.5);
     this.ctx = ctx;
     painter.draw(ctx, this.props.items);
   }
