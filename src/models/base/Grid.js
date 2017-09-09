@@ -5,6 +5,6 @@ import settings from "../../settings";
 const fontMetric = fontUtil.getMetric(settings.fontName, settings.fontSize);
 
 export default class Grid {
-  static width: number = fontMetric.width;
-  static height: number = fontMetric.height;
+  static width: number = Math.ceil(fontMetric.width);
+  static height: number = Math.ceil(fontMetric.height);
 }
