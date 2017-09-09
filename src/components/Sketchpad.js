@@ -17,7 +17,7 @@ class Sketchpad extends PureComponent {
 
   constructor(props: Props) {
     super(props);
-    (this: any).addLineHandler = this.addLineHandler.bind(this);
+    this.addLineHandler = this.addLineHandler.bind(this);
   }
 
   componentDidMount() {
@@ -78,18 +78,24 @@ class Sketchpad extends PureComponent {
         >
           Cross Line
         </button>
-        <div style={{ width: 300, height: 300, fontFamily: "Source Code Pro" }}>
+        <div
+          style={{
+            width: 300,
+            height: 300,
+            fontFamily: "Source Code Pro",
+            fontSize: "14px"
+          }}
+        >
           <pre
             style={{
               fontFamily: "Source Code Pro",
-              fontSize: "14px",
-              lineHeight: "18px"
+              fontSize: "14px"
             }}
           >
             +-----------+------------+<br />
-            |       Sketchpad        |<br />
+            | Sketchpad |<br />
             +------------------------+<br />
-            |                        |<br />
+            | |<br />
             +------------------------+<br />
           </pre>
         </div>
